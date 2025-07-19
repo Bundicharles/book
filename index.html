@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Romantic Glassmorphic Flipbook</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+
   <style>
     * {
       box-sizing: border-box;
@@ -16,7 +17,7 @@
       font-family: 'Georgia', serif;
       height: 100vh;
       overflow: hidden;
-      background: linear-gradient(135deg, #d6336c, #ff758c, #ff7eb3);
+      background: linear-gradient(135deg, #ff0101, #0509ff, #29f300);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -61,7 +62,7 @@
       perspective: 1500px;
       z-index: 3;
       position: relative;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 20px 40px rgba(255, 0, 0, 0.993);
     }
 
     .book {
@@ -77,7 +78,7 @@
       position: absolute;
       top: 0;
       left: 0;
-      padding: 30px;
+      padding: 20px;
       border-radius: 15px;
       color: #fff;
       font-size: 18px;
@@ -93,27 +94,41 @@
       height: 100%;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
       text-align: center;
       text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-      padding: 20px;
+      padding: 15px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .scroll-container {
+      height: calc(100% - 70px); /* Space for title and padding */
       overflow-y: auto;
+      padding: 10px;
+      margin-top: 15px;
+      text-align: left;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.1);
     }
 
     /* Glassmorphic background with blur */
-    .page::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-image: var(--bg-image);
-      background-size: cover;
-      background-position: center;
-      filter: blur(15px) brightness(0.9);
-      z-index: 1;
-    }
+   .page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: var(--bg-image);
+  background-size: cover;
+  background-position: center;
+  filter: blur(4px) brightness(0.8);
+  opacity: 0.85;
+  z-index: 1;
+}
+
 
     /* Frosted glass overlay */
     .page::after {
@@ -123,10 +138,10 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(18px);
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(8px);
       border: 1px solid rgba(255, 255, 255, 0.2);
-      box-shadow: inset 0 0 25px rgba(255, 255, 255, 0.3);
+      box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.3);
       z-index: 1;
       border-radius: 15px;
     }
@@ -150,55 +165,72 @@
     /* Page specific styles */
     .page-1 .page-content {
       background: linear-gradient(135deg, rgba(214, 51, 108, 0.3), rgba(255, 117, 140, 0.3));
-      border-radius: 10px;
-      padding: 40px;
     }
 
     .page-2 .page-content {
       background: linear-gradient(135deg, rgba(106, 76, 147, 0.3), rgba(186, 104, 200, 0.3));
-      border-radius: 10px;
-      padding: 40px;
     }
 
     .page-3 .page-content {
       background: linear-gradient(135deg, rgba(255, 152, 0, 0.3), rgba(255, 193, 7, 0.3));
-      border-radius: 10px;
-      padding: 40px;
     }
 
     .page-4 .page-content {
       background: linear-gradient(135deg, rgba(0, 150, 136, 0.3), rgba(77, 182, 172, 0.3));
-      border-radius: 10px;
-      padding: 40px;
     }
-
+     .page-5 .page-content {
+      background: linear-gradient(135deg, rgba(0, 150, 136, 0.3), rgba(77, 182, 172, 0.3));
+    }
+ .page-6 .page-content {
+      background: linear-gradient(135deg, rgba(0, 150, 136, 0.3), rgba(77, 182, 172, 0.3));
+    }
     .page-number {
       position: absolute;
       bottom: 20px;
       right: 20px;
       font-size: 16px;
       z-index: 3;
-      background: rgba(255, 255, 255, 0.2);
+      background: rgb(40, 2, 255);
       padding: 4px 10px;
       border-radius: 20px;
       backdrop-filter: blur(5px);
     }
 
     .page-title {
-      font-size: 2.8rem;
-      margin-bottom: 20px;
+      font-size: 2.3rem;
+      margin-bottom: 15px;
       font-weight: bold;
-      min-height: 70px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid rgb(70, 3, 255);
     }
 
     .page-text {
       line-height: 1.8;
-      margin-top: 20px;
       font-size: 1.1rem;
-      flex-grow: 1;
-      overflow-y: auto;
-      padding: 10px 5px;
-      text-align: left;
+      margin-bottom: 15px;
+    }
+
+    .page-text p {
+      margin-bottom: 15px;
+    }
+
+    /* Custom scrollbar */
+    .scroll-container::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    .scroll-container::-webkit-scrollbar-track {
+      background: rgb(153, 131, 131);
+      border-radius: 10px;
+    }
+    
+    .scroll-container::-webkit-scrollbar-thumb {
+      background: rgb(247, 6, 6);
+      border-radius: 10px;
+    }
+    
+    .scroll-container::-webkit-scrollbar-thumb:hover {
+      background: rgb(250, 2, 2);
     }
 
     /* Controls */
@@ -231,7 +263,7 @@
     }
 
     button:hover {
-      background: rgba(255, 255, 255, 0.4);
+      background: rgb(30, 7, 240);
       transform: translateY(-3px);
       box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
     }
@@ -248,7 +280,7 @@
       top: 20px;
       left: 50%;
       transform: translateX(-50%);
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(0, 4, 255, 0.89);
       padding: 8px 20px;
       border-radius: 30px;
       font-size: 1.1rem;
@@ -264,7 +296,7 @@
       width: 200px;
       height: 200px;
       border-radius: 50%;
-      background: radial-gradient(rgba(255, 255, 255, 0.3), transparent 70%);
+      background: radial-gradient(rgba(248, 3, 3, 0.932), transparent 70%);
       filter: blur(40px);
       z-index: 2;
     }
@@ -290,135 +322,6 @@
       height: 180px;
     }
 
-    /* Upload modal */
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.7);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 100;
-      backdrop-filter: blur(5px);
-    }
-    
-    .modal {
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 15px;
-      padding: 30px;
-      width: 90%;
-      max-width: 500px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-      max-height: 90vh;
-      overflow-y: auto;
-    }
-    
-    .modal h2 {
-      text-align: center;
-      color: #d6336c;
-      margin-bottom: 20px;
-    }
-    
-    .upload-group {
-      margin-bottom: 20px;
-    }
-    
-    .upload-group label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: bold;
-      color: #333;
-    }
-    
-    .upload-group input {
-      width: 100%;
-      padding: 10px;
-      border: 2px dashed #d6336c;
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.5);
-    }
-    
-    .modal-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 20px;
-    }
-    
-    .modal-buttons button {
-      background: #d6336c;
-      color: white;
-      border: none;
-      padding: 10px 25px;
-    }
-    
-    .modal-buttons button.secondary {
-      background: #6c757d;
-    }
-    
-    /* Settings button */
-    .settings-btn {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      z-index: 10;
-      background: rgba(255, 255, 255, 0.3);
-      border: none;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      backdrop-filter: blur(5px);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-      transition: all 0.3s ease;
-    }
-    
-    .settings-btn:hover {
-      background: rgba(255, 255, 255, 0.5);
-      transform: rotate(30deg);
-    }
-    
-    .settings-btn i {
-      font-size: 24px;
-      color: #fff;
-    }
-
-    /* Add Page button */
-    .add-page-btn {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      z-index: 10;
-      background: rgba(255, 255, 255, 0.3);
-      border: none;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      backdrop-filter: blur(5px);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-      transition: all 0.3s ease;
-    }
-    
-    .add-page-btn:hover {
-      background: rgba(255, 255, 255, 0.5);
-      transform: scale(1.1);
-    }
-    
-    .add-page-btn i {
-      font-size: 24px;
-      color: #fff;
-    }
-
     /* Responsive design */
     @media (max-width: 480px) {
       .book-container {
@@ -427,78 +330,25 @@
       }
       
       .page-content {
-        padding: 15px;
+        padding: 10px;
       }
       
       .page-title {
-        font-size: 2.3rem;
+        font-size: 2rem;
+      }
+      
+      .page-text {
+        font-size: 1rem;
       }
       
       button {
         padding: 10px 20px;
         font-size: 14px;
       }
-    }
-
-    /* Scrollbar styling */
-    .page-text::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    .page-text::-webkit-scrollbar-track {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-    }
-
-    .page-text::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.3);
-      border-radius: 10px;
-    }
-
-    .page-text::-webkit-scrollbar-thumb:hover {
-      background: rgba(255, 255, 255, 0.5);
-    }
-
-    /* New page styles */
-    .new-page .page-content {
-      background: linear-gradient(135deg, rgba(100, 181, 246, 0.3), rgba(66, 165, 245, 0.3));
-      border-radius: 10px;
-      padding: 40px;
-    }
-
-    /* Page edit controls */
-    .edit-controls {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      display: flex;
-      gap: 10px;
-      z-index: 10;
-    }
-
-    .edit-btn {
-      background: rgba(255, 255, 255, 0.3);
-      border: none;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      backdrop-filter: blur(5px);
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-      transition: all 0.3s ease;
-    }
-    
-    .edit-btn:hover {
-      background: rgba(255, 255, 255, 0.5);
-      transform: scale(1.1);
-    }
-    
-    .edit-btn i {
-      font-size: 18px;
-      color: #fff;
+      
+      .scroll-container {
+        height: calc(100% - 60px);
+      }
     }
   </style>
 </head>
@@ -512,58 +362,278 @@
   <div class="decoration"></div>
   <div class="decoration"></div>
 
-  <!-- Add Page button -->
-  <button class="add-page-btn" id="addPageBtn">
-    <i class="fas fa-plus"></i>
-  </button>
-
-  <!-- Settings button -->
-  <button class="settings-btn" id="settingsBtn">
-    <i class="fas fa-cog"></i>
-  </button>
-
   <!-- Page counter -->
-  <div class="page-counter">Page <span id="current-page">1</span> of <span id="total-pages">4</span></div>
+  <div class="page-counter">Page <span id="current-page">1</span> of <span id="total-pages"></span></div>
 
   <!-- Flipbook -->
   <div class="book-container">
     <div class="book" id="book">
-      <div class="page page-1 active" id="page1">
+      <div class="page page-1 active" style="--bg-image: url('page1.jpg')">
         <div class="page-content">
-          <div class="page-title">❤️ My Dearest Love</div>
-          <div class="page-text">
-            My heart races when I see you. This book is dedicated to you, my eternal flame. Every moment with you is a cherished memory. From the way your eyes sparkle when you laugh to the warmth of your embrace, every detail is etched in my heart. I remember the first time we met, how my world suddenly had new colors, how everything seemed brighter and more meaningful. Our journey together has been the most beautiful adventure, and I look forward to every step we take together in the future. You are my sunshine on the rainiest days, my comfort in times of sorrow, and my greatest joy in moments of happiness. I cherish every laugh we share, every tear we've wiped away together, and every dream we've built side by side. With you, I've discovered a love so deep and true that it transforms every day into a gift. Thank you for being you, for sharing your life with me, and for loving me as I am. I promise to stand by your side, to support your dreams, to celebrate your victories, and to hold you close through every challenge. You are my forever, my always, my everything.
+          <div class="page-title">❤️Love That Time Didn't Touch</div>
+          <div class="scroll-container">
+            <div class="page-text">
+              <p>Some stories are not written in chapters but in heartbeats, in the quiet moments that live between yesterday and today. This is our story—Alice and Charles—a journey that began in the dusty fields and bright classrooms of St. Joseph Primary School, and somehow, despite life's winding roads, found its way back home.</p>
+              
+              <p>I first met Alice in 2015. We were just kids then, full of dreams and curiosity, never imagining that the simplest friendships could one day become something deeper. She was the kind of girl who lit up a room without even trying, and it didn't take long before we became friends. It was natural—effortless. There was this understanding between us, like we had known each other in another lifetime.</p>
+              
+              <p>Her brother was the Entertainment Captain at our school, and when he left, I somehow found myself stepping into his shoes. It felt like more than a coincidence. Inheriting that role connected me to Alice in a way that even now, I can't quite explain. We were young, but there was something about those days that made everything feel timeless. The laughter, the talks after school, the way we cheered for each other during class group works—it all wove a story I carried with me long after we parted.</p>
+              
+              <p>At the end of 2018, life did what life often does. We graduated, and our paths split. She went to her high school; I went to mine. And with time, as it tends to happen, contact was lost. Six years passed. Six years of growing up, of learning who we were in a world that had gotten a little bigger and a little louder.</p>
+              
+              <p>But then, in 2025, as if the universe decided we had waited long enough, our paths crossed again.</p>
+              
+              <p>For years, I had tried my best to find her on social media, searching for any trace of the girl who had meant so much to me. But every search led to nothing. It was like she had disappeared into the world, just out of reach.</p>
+              
+              <p>And then, on a quiet Sunday night—March 2, 2025, at exactly 10:41 PM—I saw a WhatsApp notification pop up on my screen. A class reunion group had been created, and there, among the names, was hers. Alice Joy.</p>
+              
+              <p>I stared at her profile picture for what felt like forever, barely believing that after all these years, she was right there. The universe had finally placed her back in my life. But even then, I didn't know if we would really reconnect—until two days later.</p>
+              
+              <p>On Tuesday, she called me.</p>
+              
+              <p>Her voice on the other end of the line was familiar and warm, like a melody I hadn't heard in years but still knew by heart. We arranged to meet at Toll Kimbo, and when I finally saw her in person—the first time in six years—it felt like a dream come true.</p>
+              
+              <p>The moment I saw her, it was like 2018 had only been yesterday. Alice was still Alice. Her smile, her voice, her spirit—they hadn't changed. And in that instant, I realized neither had my feelings. It wasn't awkward. It wasn't forced. It was a continuation of what we left unfinished all those years ago. It was as if life had hit "pause" and now, finally, pressed "play."</p>
+              
+              <p>We talked about everything and nothing. We laughed like we used to. The connection was still there—stronger, if anything, because now we were older, wiser, and understood just how rare something like this is.</p>
+              
+              <p>What are the odds? That two people could find their way back to each other after all that time?</p>
+              
+              <p>And yet, here we are.</p>
+              
+              <p>Some love stories don't need grand gestures or dramatic confessions. Some are quiet, steady, and patient. Ours waited for six years. And when we met again, it didn't feel like starting over. It felt like coming home.</p>
+              
+              <p>Alice Wangui, you are my once-in-a-lifetime. And I am grateful beyond words that life brought us back together—hoping this is for a lifetime.</p>
+              <p><em>~~Chilloh~~</em></p>
+            </div>
           </div>
         </div>
         <div class="page-number">Page 1</div>
       </div>
-      <div class="page page-2" id="page2">
+      <div class="page page-2" style="--bg-image: url('page2.jpg')">
         <div class="page-content">
-          <div class="page-title">💌 Our Journey</div>
-          <div class="page-text">
-            Every heartbeat echoes your name. Our love story is my favorite tale to tell. From our first hello to forever. I remember our first date, how nervous I was, how you made me feel at ease with your smile. That night, under the stars, I knew I had found something special. We've shared so many beautiful moments since then - weekend getaways, quiet evenings at home, adventures that tested us and brought us closer. We've built traditions that are uniquely ours: Sunday morning pancakes, movie nights with terrible rom-coms, and that special spot by the lake where we watch the sunset. Through challenges and triumphs, we've grown together, learning each other's rhythms and creating a harmony that only we understand. Our journey hasn't always been smooth - there were misunderstandings and difficult times - but each obstacle only strengthened our bond. We learned to communicate better, to listen with our hearts, and to forgive with grace. These experiences taught us that love isn't just about the perfect moments, but about choosing each other again and again, even when it's hard. I treasure every chapter of our story, and I can't wait to write the next ones with you.
+          <div class="page-title">❤️Love That Time Didn't Touch2</div>
+          <div class="scroll-container">
+            <div class="page-text">
+             <p>After that reunion at Toll Kimbo, something shifted. It started with small conversations—the kind that sneak up on you and stretch into hours without you noticing. Day after day, night after night, we spoke. About everything and nothing. About dreams we once had and the lives we were building now.</p>
+
+<p>Her voice became the music in my day. It was like a ritual—one I couldn’t go without. And somewhere in between those calls, in the gentle silences, the teasing laughter, and the vulnerable confessions, I realized I didn’t just want Alice back in my life.</p>
+
+<p>I wanted her in it. For good.</p>
+
+<p>Sometimes, the conversations felt like we were soulmates in the making. Other times, we clashed—frustrated by the past, by misread words, by fears we didn’t know how to voice. But even in those moments, I didn’t want to let go. I knew this wasn’t just friendship rekindled. It was something deeper—more delicate, more powerful.</p>
+
+<p>She wasn’t just someone I cared about. She was becoming home.</p>
+
+<p>We had planned another class meetup—a simple picnic by the riverside near our old school grounds. It was our second time seeing each other since that night at Toll Kimbo, and I couldn’t stop thinking about her. About the way her presence filled a space. About how everything seemed softer when she was near.</p>
+
+<p>That day, when she arrived, time slowed down.</p>
+
+<p>Alice had a glow about her—like she was lit from the inside out. Her new nose ring sparkled in the sun, and the way she smiled when she spotted me made everything else around us blur. I wanted to freeze that moment and live in it forever.</p>
+
+<p>We talked, laughed, joked with classmates—but I kept stealing glances at her. I noticed the way she moved, the way she threw her head back when she laughed, how she bit her lip when lost in thought. And I wondered—how did I ever survive six years without this?</p>
+
+<p>As the sun dipped low and golden hour painted the sky, we slipped away from the group. Just like old times, just like destiny had always planned it. We walked side by side along the quiet path, where the breeze whispered through the trees and memories lingered in the air.</p>
+
+<p>It wasn’t about the words anymore. It was the silence between them that said everything.</p>
+
+<p>She brushed her hand against mine, and I took it, gently. Her fingers fit into mine like they had always belonged there. I looked at her—and in her eyes, I saw it too.</p>
+
+<p>A spark. A question. A maybe.</p>
+
+<p>We walked until the stars came out, and the laughter of our classmates faded infront far from us. When it was time to say goodbye, I took her to the stage of the evening one last time—where she waited for her ride home.</p>
+
+<p>And before she left, she leaned in, smiled softly, and gave me a peck on the cheek.</p>
+
+<p>A whisper of a kiss.</p>
+
+<p>But to me, it was everything.</p>
+
+<p>Since that day, I haven’t stopped thinking about her. She’s the thought that lingers at sunrise and the prayer I whisper before sleep. And while she still says she’s figuring things out, still not sure what this all means—I’m okay with waiting.</p>
+
+<p>Because for me, the answer is already clear.</p>
+
+<p>It’s her. It’s always been her.</p>
+
+<p>Some stories aren’t loud or flashy. Some don’t need dramatic scenes.<br>
+Some are told in stolen glances, in inside jokes, in soft walks under the stars.</p>
+
+<p>Ours is one of those.<br>
+And as I write this now, I carry hope—not just for another moment, but for a future.<br>
+For a love that began in a classroom, paused by time, and returned more certain than ever.</p>
+
+<p><strong>Alice Wangui</strong>, whatever you decide, just know—you will always be my favorite story.</p>
+<p><em>~~Chilloh~~</em></p>
+
+            </div>
           </div>
         </div>
         <div class="page-number">Page 2</div>
       </div>
-      <div class="page page-3" id="page3">
+      <div class="page page-3" style="--bg-image: url('page3.jpg')">
         <div class="page-content">
-          <div class="page-title">🌹 Memories</div>
-          <div class="page-text">
-            I've written you a thousand letters in my mind. Each page of this book tells a story of us. Our laughter, our tears, our dreams. I remember our trip to the mountains, how we got lost but found the most beautiful waterfall. We danced in the rain that day, not caring about anything but the moment. Then there was that time we stayed up all night talking, sharing secrets and dreams as the city slept around us. I'll never forget your face when I surprised you with concert tickets to see your favorite band, or how you held my hand during the scary parts of that horror movie even though you were scared too. We've celebrated birthdays and anniversaries, welcomed new friends and said goodbye to old ones. We've supported each other through career changes and personal growth. There was that rainy Tuesday when you brought me soup because I was sick, and I knew then that I had found my home in your care. These memories are the treasures of my heart, each one a precious gem that shines with the light of our love. Even the difficult memories have meaning - the times we disagreed but found our way back to each other, the challenges that showed us what we're made of. Every moment, whether joyful or challenging, has woven us tighter together, creating a tapestry of shared experiences that is uniquely ours.
+          <div class="page-title">🥰HER</div>
+          <div class="scroll-container">
+            <div class="page-text">
+<p>There are people who come into your life and change everything.</p>            
+<p>You are not just someone I care about.</p>
+
+<p>You are the quiet force that holds me together when I'm falling apart.</p>
+
+<p>You are the voice in my head that reminds me I'm not alone—even when you're not here.</p>
+
+<p>You've taught me to believe in good things again, simply because you are one of them.</p>
+
+<p>I could name a hundred little moments where your presence changed something in me—even if you never realized it.</p>
+
+<p>It's the way you really see me—and still choose to stay. It's the way your laughter feels like coming home.</p>
+
+<p>It's the way you make the world softer, brighter, better—just by being in it.</p>
+
+<p>Sometimes, I'm afraid I don’t tell you enough. Afraid you’ll never truly grasp how much you saved me, in ways big and small.</p>
+
+<p>But let me say it today: <strong>You are everything.</strong></p>
+
+<p>Not in the way people say it lightly, but in a way that aches—because losing you would tear a hole in my universe.</p>
+
+<p>You are loved—not for what you do, but for who you are.</p>
+
+<p><em>~~Chilloh~~</em></p>
+
+            </div>
           </div>
         </div>
         <div class="page-number">Page 3</div>
       </div>
-      <div class="page page-4" id="page4">
+      <div class="page page-4" style="--bg-image: url('page4.jpg')">
         <div class="page-content">
-          <div class="page-title">💖 Forever</div>
-          <div class="page-text">
-            Forever isn't long enough with you. Let's keep writing our chapters together. You are my today and all of my tomorrows. As I look toward the future, I see us growing old together, our hands still clasped, our hearts still beating in rhythm. I dream of the home we'll build, the adventures we'll have, the quiet moments we'll share. I imagine us traveling to places we've only talked about, learning new things together, and creating traditions that our future family will cherish. I see us supporting each other's dreams, celebrating each other's successes, and being each other's shelter during life's storms. With you, I've found not just a partner, but a best friend, a confidant, a true companion for life's journey. You've shown me what unconditional love looks like, and I promise to give you that same love every day. I vow to be patient when you're stubborn, to listen when you need to be heard, to laugh at your jokes even when they're terrible, and to hold you close when the world feels too heavy. Together, we can face anything. You are my anchor and my wings, my calm and my excitement, my yesterday, today, and tomorrow. I choose you today, and I will choose you every day for all my days.
+          <div class="page-title">💖MY GIRL</div>
+          <div class="scroll-container">
+            <div class="page-text">
+              <p>MY WOMAN...</p>
+<p>My woman is my priority ❤...</p>
+<p>Nitaweka stamp ya KEBS kwako ndio wajue you are indeed my property...</p>
+<p>Sijui mbona nakupenda 💕💕</p>
+<p>Juu daily nikiamka nachecki time na Calendar, my top agenda then hold my chest to feel my heart beat and feel that ndani you are the only member...</p>
+<p>Dreams bila wewe is so scary like nightmares</p>
+<p>I don't know the meaning of LOVE ♥ for sure when you are not there...</p>
+<p>Or maybe if you start acting like you don't care 😪, it won't be fair, juu Moyo wangu utakuwa unaitear 💔</p>
+<p>Kama Mapenzi safari basi drive me so far away ...</p>
+<p>Sijali nikipata ajali as long as niko na wewe I KnoW that you will drive that pain 💦 away</p>
+<p>Wow😍😍Av never felt something this fantastic</p>
+<p>U be the definition of what I call romantic Nourishment.</p>
+<p>U fine and tick ☑</p>
+<p>Your beauty got me speechless...</p>
+<p>I can't resist you that Loving ❤ you has become my weakness...</p>
+<p>Your feelings diffuses inside me like the tiny things that causes sickness...</p>
+<p>I wonder where I can get that crown 👑 and officially crown you as my princess...</p>
+
+<p>MY WOMAN, My everything...</p>
+<p>She is my motivation, my encouragement to take another step towards winning.</p>
+<p>I would go to hell 🔥🔥 a thousand times if loving you was a sin</p>
+<p>The way we have each other's back step by step we on the same team</p>
+<p>Do not reduce that pace, u relieve me from stress, to you I would place a bet coz you are a sure win ...</p>
+<p>This love 💕 of yours is so rare ...</p>
+<p>I lack words to explain it.</p>
+<p>Our love 💕 story is so true that utacombine kila story on planet Earth to make ours</p>
+<p>Thanks alot for making me believe in Love 💕 again...</p>
+<p>You my top striker, half time uko na hatrick u above this game</p>
+<p>Al forever be your umbrella ⛱ so call me ukiona dalili za rain</p>
+<p><em>~~Chilloh~~</em></p>
+
+            </div>
           </div>
         </div>
         <div class="page-number">Page 4</div>
       </div>
+      <div class="page page-5" style="--bg-image: url('page5.jpg')">
+  <div class="page-content">
+    <div class="page-title">The Words I Haven’t Said</div>
+    <div class="scroll-container">
+      <div class="page-text">
+<p>Hey Alice,</p>
+
+<p>There’s something I’ve been meaning to tell you — not to complicate things, but to finally speak from my heart without holding back.</p>
+
+<p>Since we found our way back into each other’s lives, something in me shifted. It’s like I found a piece of peace I didn’t know I was still searching for. Just hearing from you, talking to you, even thinking of you… it’s like the world gets quieter and more beautiful for a moment.</p>
+
+<p>You’re more than just someone I care about. You’re someone I admire deeply — your kindness, your humor, your ambition, the way your eyes light up when you smile. You’ve become someone I dream of having by my side, not just as a passing thought, but in the most serious, real way. When the time is right, I wouldn’t hesitate to ask for your hand. That vision of one day calling you mine, taking you home to share life together — it’s one of my deepest hopes.</p>
+
+<p>But at the same time… I’ve been struggling. Some days, the silence between us makes my heart race with doubt, breaks something in me. I lose sleep. I get stuck in thoughts that spiral. I’ve even thought about disappearing, blocking you, pushing myself away — not because I want to forget you, but because I don’t know how to carry the weight of wanting something so deeply and not knowing if it’s ever going to be mine.</p>
+
+<p>But then I remember your smile, your voice, the light you bring. And somehow, I hang on — even if it’s just by holding onto a photo of you, or the memory of how you welcomed me so warmly. It reminds me that whatever this is, it’s real to me. And that’s worth something.</p>
+
+<p>I’m not asking for answers, or promises. I just needed to say it — honestly, openly, fully. Because you’re worth every word, and this isn’t just a passing crush for me.</p>
+<p><em>~~Chilloh~~</em></p>
+      </div>
+    </div>
+  </div>
+  <div class="page-number">Page 5</div>
+</div>
+<div class="page page-6" style="--bg-image: url('page6.jpg')">
+  <div class="page-content">
+    <div class="page-title">carved silence😊</div>
+    <div class="scroll-container">
+      <div class="page-text">
+        <p>I don’t know what your heart holds close,<br>
+But mine has carved your name like a rose.<br>
+In every quiet moment, you appear—<br>
+Soft as a whisper, yet crystal clear.</p>
+
+<p>You made me see the man I could be,<br>
+Not for the world, but for the love I see.<br>
+In the way your smile feels like dawn,<br>
+Even when I fear this might be gone.</p>
+
+<p>If love were words, I’d write you skies,<br>
+Filled with stars that never lie.<br>
+But lately, I walk this path alone,<br>
+With questions growing like overgrown stone.</p>
+
+<p>Do you feel it too, or is it just me,<br>
+Building castles on what cannot be?<br>
+Am I part of your hidden flame,<br>
+Or just a shadow calling your name?</p>
+
+<p>So if there's truth behind your eyes,<br>
+Let it rise, don’t let it disguise.<br>
+For hearts like mine don't ask in vain—<br>
+They seek the sun, not love in rain.</p>
+
+        <p><em>~~Chilloh~~</em></p>
+      </div>
+    </div>
+  </div>
+  <div class="page-number">Page 6</div>
+</div>
+<div class="page page-7" style="--bg-image: url('page7.jpg')">
+  <div class="page-content">
+    <div class="page-title">The Rival😊</div>
+
+    <div class="scroll-container">
+      <div class="page-text">
+        <p>Your beauty leaves me truly weak,<br>
+        The perfect words I long to speak!<br>
+        But when I gaze with lovesick eyes,<br>
+        A tiny screen blocks my surprise.</p>
+
+        <p>You're scrolling memes with focused grace,<br>
+        A smile lighting up your face.<br>
+        Is it a cat? A dance? A pun?<br>
+        My rival's bright, weighs half a ton (of data!).</p>
+
+        <p>I love your laugh, your wit, your style,<br>
+        But could you put it down... just for a little while?<br>
+        (Then scroll together, side-by-side,<br>
+        My place is right here, by your side!)</p>
+
+        <p><em>~~Chilloh~~</em></p>
+      </div>
+    </div>
+  </div>
+  <div class="page-number">Page 7</div>
+</div>
+
     </div>
   </div>
 
@@ -577,233 +647,83 @@
     </button>
   </div>
 
-  <!-- Upload Modal -->
-  <div class="modal-overlay" id="modalOverlay" style="display:none;">
-    <div class="modal">
-      <h2>Customize Your Flipbook</h2>
-      
-      <div id="upload-fields">
-        <!-- Upload fields will be generated here -->
-      </div>
-      
-      <div class="modal-buttons">
-        <button class="secondary" id="cancelBtn">Cancel</button>
-        <button id="saveBtn">Save Changes</button>
-      </div>
-    </div>
-  </div>
+ <script>
+  const pages = document.querySelectorAll('.page');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const currentPageEl = document.getElementById('current-page');
+  const totalPagesEl = document.getElementById('total-pages');
 
-  <script>
-    // Default background images
-    const defaultBackgrounds = [
-      'https://images.unsplash.com/photo-1516487200032-8532cb603261?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80',
-      'https://images.unsplash.com/photo-1529254479751-fbacb4c7b7c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
-      'https://images.unsplash.com/photo-1519638831568-d9897f54ed69?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
-      'https://images.unsplash.com/photo-1516487106395-fa4a6a82740d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80'
-    ];
+  let currentPage = parseInt(localStorage.getItem('lastPage')) || 0;
+  const totalPages = pages.length;
 
-    // Elements
-    const book = document.getElementById('book');
-    const pages = document.querySelectorAll('.page');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const currentPageEl = document.getElementById('current-page');
-    const totalPagesEl = document.getElementById('total-pages');
-    const modalOverlay = document.getElementById('modalOverlay');
-    const settingsBtn = document.getElementById('settingsBtn');
-    const cancelBtn = document.getElementById('cancelBtn');
-    const saveBtn = document.getElementById('saveBtn');
-    const addPageBtn = document.getElementById('addPageBtn');
-    const uploadFields = document.getElementById('upload-fields');
-    
-    // Bookmarking
-    let currentPage = 0;
-    let totalPages = pages.length;
-    totalPagesEl.textContent = totalPages;
-    
-    // Initialize book
-    function initializeBook() {
-      // Load saved page position
-      const savedPage = localStorage.getItem('romanticBookmark');
-      if (savedPage !== null) {
-        currentPage = parseInt(savedPage);
+  totalPagesEl.textContent = totalPages;
+
+  function updatePages() {
+    pages.forEach((page, index) => {
+      page.classList.remove('active');
+      if (index < currentPage) {
+        page.style.transform = 'rotateY(-180deg)';
+      } else {
+        page.style.transform = 'rotateY(0deg)';
       }
-      
-      // Load saved background images
-      for (let i = 0; i < totalPages; i++) {
-        const savedBg = localStorage.getItem(`page${i+1}-bg`);
-        const pageElement = document.getElementById(`page${i+1}`);
-        
-        if (savedBg) {
-          pageElement.style.setProperty('--bg-image', `url(${savedBg})`);
-        } else if (defaultBackgrounds[i]) {
-          pageElement.style.setProperty('--bg-image', `url(${defaultBackgrounds[i]})`);
-        }
-      }
-      
+    });
+
+    if (pages[currentPage]) {
+      pages[currentPage].classList.add('active');
+      currentPageEl.textContent = currentPage + 1;
+
+      const scrollContainer = pages[currentPage].querySelector('.scroll-container');
+      if (scrollContainer) scrollContainer.scrollTop = 0;
+    }
+
+    prevBtn.disabled = currentPage === 0;
+    nextBtn.disabled = currentPage === totalPages - 1;
+
+    // Store the last page index
+    localStorage.setItem('lastPage', currentPage);
+  }
+
+  function nextPage() {
+    if (currentPage < totalPages - 1) {
+      currentPage++;
+      updatePages();
+      pages[currentPage - 1].style.transform = 'rotateY(-180deg)';
+    }
+  }
+
+  function prevPage() {
+    if (currentPage > 0) {
+      pages[currentPage].style.transform = 'rotateY(0deg)';
+      currentPage--;
       updatePages();
     }
-    
-    // Update pages
-    function updatePages() {
-      totalPages = document.querySelectorAll('.page').length;
-      totalPagesEl.textContent = totalPages;
-      
-      pages.forEach((page, index) => {
-        page.classList.remove('active');
-        
-        // Add 3D transform for page flip effect
-        if (index < currentPage) {
-          page.style.transform = 'rotateY(-180deg)';
-        } else {
-          page.style.transform = 'rotateY(0deg)';
-        }
-      });
-      
-      const currentPageElement = document.querySelectorAll('.page')[currentPage];
-      if (currentPageElement) {
-        currentPageElement.classList.add('active');
-        currentPageEl.textContent = currentPage + 1;
-      }
-      
-      // Update button states
-      prevBtn.disabled = currentPage === 0;
-      nextBtn.disabled = currentPage === totalPages - 1;
-      
-      // Save current page to localStorage
-      localStorage.setItem('romanticBookmark', currentPage.toString());
-    }
+  }
 
-    // Navigation functions
-    function nextPage() {
-      if (currentPage < totalPages - 1) {
-        currentPage++;
-        updatePages();
-        
-        // Add page flip animation
-        const prevPageElement = document.querySelectorAll('.page')[currentPage - 1];
-        if (prevPageElement) {
-          prevPageElement.style.transform = 'rotateY(-180deg)';
-        }
-      }
-    }
+  // Floating hearts animation
+  const heartsContainer = document.getElementById('hearts');
+  setInterval(() => {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.style.left = `${Math.random() * 100}%`;
+    heart.style.fontSize = `${20 + Math.random() * 20}px`;
+    heart.style.animationDuration = `${4 + Math.random() * 4}s`;
+    heart.textContent = ['❤️', '💖', '💘', '💋', '😘', '🥰', '💗', '💓', '💞', '💝'][Math.floor(Math.random() * 10)];
+    heartsContainer.appendChild(heart);
+    setTimeout(() => heartsContainer.removeChild(heart), 8000);
+  }, 300);
 
-    function prevPage() {
-      if (currentPage > 0) {
-        const currentPageElement = document.querySelectorAll('.page')[currentPage];
-        if (currentPageElement) {
-          currentPageElement.style.transform = 'rotateY(0deg)';
-        }
-        currentPage--;
-        updatePages();
-      }
-    }
+  prevBtn.addEventListener('click', prevPage);
+  nextBtn.addEventListener('click', nextPage);
 
-    // Floating Hearts Animation
-    const heartsContainer = document.getElementById('hearts');
-    setInterval(() => {
-      const heart = document.createElement('div');
-      heart.className = 'heart';
-      heart.style.left = `${Math.random() * 100}%`;
-      heart.style.fontSize = `${20 + Math.random() * 20}px`;
-      heart.style.animationDuration = `${4 + Math.random() * 4}s`;
-      heart.textContent = ['❤️','💖','💘','💕','💌','💗','💓','💞','💝'][Math.floor(Math.random() * 9)];
-      heartsContainer.appendChild(heart);
-      setTimeout(() => heartsContainer.removeChild(heart), 8000);
-    }, 300);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') nextPage();
+    if (e.key === 'ArrowLeft') prevPage();
+  });
 
-    // Modal functions
-    settingsBtn.addEventListener('click', () => {
-      // Generate upload fields for all pages
-      uploadFields.innerHTML = '';
-      
-      document.querySelectorAll('.page').forEach((page, index) => {
-        const pageNum = index + 1;
-        const div = document.createElement('div');
-        div.className = 'upload-group';
-        div.innerHTML = `
-          <label for="page${pageNum}-upload">Page ${pageNum} Background</label>
-          <input type="file" id="page${pageNum}-upload" accept="image/*">
-        `;
-        uploadFields.appendChild(div);
-      });
-      
-      modalOverlay.style.display = 'flex';
-    });
-    
-    cancelBtn.addEventListener('click', () => {
-      modalOverlay.style.display = 'none';
-    });
-    
-    // Save background images
-    saveBtn.addEventListener('click', () => {
-      modalOverlay.style.display = 'none';
-      
-      // Save all file inputs
-      document.querySelectorAll('.page').forEach((page, index) => {
-        const pageNum = index + 1;
-        const fileInput = document.getElementById(`page${pageNum}-upload`);
-        if (fileInput && fileInput.files.length > 0) {
-          const reader = new FileReader();
-          reader.onload = function(e) {
-            // Save to localStorage
-            localStorage.setItem(`page${pageNum}-bg`, e.target.result);
-            
-            // Update background
-            document.getElementById(`page${pageNum}`).style.setProperty('--bg-image', `url(${e.target.result})`);
-          };
-          reader.readAsDataURL(fileInput.files[0]);
-        }
-      });
-    });
+  // Initialize
+  updatePages();
+</script>
 
-    // Add new page
-    addPageBtn.addEventListener('click', () => {
-      const newPageNum = totalPages + 1;
-      const newPage = document.createElement('div');
-      newPage.className = 'page new-page';
-      newPage.id = `page${newPageNum}`;
-      newPage.innerHTML = `
-        <div class="page-content">
-          <div class="page-title" contenteditable="true">New Page Title</div>
-          <div class="page-text" contenteditable="true">Click to edit your text... Write as much as you want here! This page can hold unlimited text with scrolling.</div>
-        </div>
-        <div class="page-number">Page ${newPageNum}</div>
-      `;
-      
-      // Set a default background
-      newPage.style.setProperty('--bg-image', `url(${defaultBackgrounds[0]})`);
-      
-      book.appendChild(newPage);
-      
-      // Set current page to the new page
-      currentPage = newPageNum - 1;
-      
-      // Update pages variable
-      pages = document.querySelectorAll('.page');
-      totalPages = pages.length;
-      
-      updatePages();
-      
-      // Add to localStorage
-      localStorage.setItem(`page${newPageNum}-bg`, defaultBackgrounds[0]);
-    });
-
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight') {
-        nextPage();
-      } else if (e.key === 'ArrowLeft') {
-        prevPage();
-      }
-    });
-    
-    // Initialize the book
-    initializeBook();
-    
-    // Button event listeners
-    prevBtn.addEventListener('click', prevPage);
-    nextBtn.addEventListener('click', nextPage);
-  </script>
 </body>
 </html>

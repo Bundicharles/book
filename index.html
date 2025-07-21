@@ -55,19 +55,22 @@
       }
     }
 
-    /* Book Container */
     .book-container {
-      width: 420px;
-      height: 520px;
-      perspective: 1500px;
-      z-index: 3;
-      position: relative;
-      box-shadow: 0 20px 40px rgba(255, 0, 0, 0.993);
-    }
+  width: 100vw;
+  height: 100vh;
+  perspective: 1500px;
+  z-index: 3;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(255, 0, 0, 0.993);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-    .book {
-      width: 100%;
-      height: 100%;
+
+      .book {
+      width: 90%;
+      height: 90%;
       position: relative;
       transform-style: preserve-3d;
     }
@@ -321,6 +324,15 @@
       width: 180px;
       height: 180px;
     }
+@media (min-width: 768px) {
+  .page-title {
+    font-size: 2.8rem;
+  }
+
+  .page-text {
+    font-size: 1.3rem;
+  }
+}
 
     /* Responsive design */
     @media (max-width: 480px) {

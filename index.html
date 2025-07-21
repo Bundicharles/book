@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Romantic Glassmorphic Flipbook</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-
   <style>
     * {
       box-sizing: border-box;
@@ -17,11 +16,15 @@
       font-family: 'Georgia', serif;
       height: 100vh;
       overflow: hidden;
-      background: linear-gradient(135deg, #ff0101, #0509ff, #29f300);
+      background: linear-gradient(135deg, rgba(255, 1, 1, 0.8), rgba(5, 9, 255, 0.7), rgba(41, 243, 0, 0.6)), 
+                  url('love-bg.jpg');
+      background-size: cover;
+      background-position: center;
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
+      backdrop-filter: blur(5px);
     }
 
     /* Floating Love Emojis */
@@ -56,23 +59,25 @@
     }
 
     .book-container {
-  width: 100vw;
-  height: 100vh;
-  perspective: 1500px;
-  z-index: 3;
-  position: relative;
-  box-shadow: 0 20px 40px rgba(255, 0, 0, 0.993);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+      width: 100vw;
+      height: calc(100vh - 100px);
+      perspective: 1500px;
+      z-index: 3;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 20px;
+    }
 
-
-      .book {
+    .book {
       width: 90%;
       height: 90%;
       position: relative;
       transform-style: preserve-3d;
+      box-shadow: 0 20px 40px rgba(255, 0, 0, 0.5),
+                  0 0 60px rgba(255, 0, 132, 0.4),
+                  0 0 100px rgba(0, 4, 255, 0.3);
     }
 
     .page {
@@ -89,6 +94,11 @@
       overflow: hidden;
       transform-style: preserve-3d;
       transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.2),
+                  0 0 30px rgba(0, 0, 0, 0.1);
     }
 
     .page-content {
@@ -100,40 +110,38 @@
       text-align: center;
       text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
       padding: 15px;
-      background: rgba(255, 255, 255, 0.15);
-      backdrop-filter: blur(10px);
       border-radius: 12px;
       overflow: hidden;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
     }
 
     .scroll-container {
-      height: calc(100% - 70px); /* Space for title and padding */
+      height: calc(100% - 70px);
       overflow-y: auto;
       padding: 10px;
       margin-top: 15px;
       text-align: left;
       border-radius: 8px;
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.05);
     }
 
-    /* Glassmorphic background with blur */
-   .page::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: var(--bg-image);
-  background-size: cover;
-  background-position: center;
-  filter: blur(4px) brightness(0.8);
-  opacity: 0.85;
-  z-index: 1;
-}
+    /* Glassmorphic background with enhanced blur and shine */
+    .page::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: var(--bg-image);
+      background-size: cover;
+      background-position: center;
+      filter: blur(8px) brightness(0.7);
+      opacity: 0.8;
+      z-index: 1;
+    }
 
-
-    /* Frosted glass overlay */
     .page::after {
       content: "";
       position: absolute;
@@ -141,12 +149,16 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.3);
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.2) 0%,
+        rgba(255, 255, 255, 0) 50%,
+        rgba(255, 255, 255, 0.2) 100%
+      );
       z-index: 1;
       border-radius: 15px;
+      box-shadow: inset 0 0 50px rgba(255, 255, 255, 0.4),
+                  inset 0 0 60px rgba(255, 255, 255, 0.2);
     }
 
     .page.active {
@@ -165,38 +177,17 @@
       }
     }
 
-    /* Page specific styles */
-    .page-1 .page-content {
-      background: linear-gradient(135deg, rgba(214, 51, 108, 0.3), rgba(255, 117, 140, 0.3));
-    }
-
-    .page-2 .page-content {
-      background: linear-gradient(135deg, rgba(106, 76, 147, 0.3), rgba(186, 104, 200, 0.3));
-    }
-
-    .page-3 .page-content {
-      background: linear-gradient(135deg, rgba(255, 152, 0, 0.3), rgba(255, 193, 7, 0.3));
-    }
-
-    .page-4 .page-content {
-      background: linear-gradient(135deg, rgba(0, 150, 136, 0.3), rgba(77, 182, 172, 0.3));
-    }
-     .page-5 .page-content {
-      background: linear-gradient(135deg, rgba(0, 150, 136, 0.3), rgba(77, 182, 172, 0.3));
-    }
- .page-6 .page-content {
-      background: linear-gradient(135deg, rgba(0, 150, 136, 0.3), rgba(77, 182, 172, 0.3));
-    }
     .page-number {
       position: absolute;
       bottom: 20px;
       right: 20px;
       font-size: 16px;
       z-index: 3;
-      background: rgb(40, 2, 255);
+      background: rgba(40, 2, 255, 0.8);
       padding: 4px 10px;
       border-radius: 20px;
       backdrop-filter: blur(5px);
+      box-shadow: 0 0 10px rgba(0, 0, 255, 0.5);
     }
 
     .page-title {
@@ -204,7 +195,8 @@
       margin-bottom: 15px;
       font-weight: bold;
       padding-bottom: 10px;
-      border-bottom: 2px solid rgb(70, 3, 255);
+      border-bottom: 2px solid rgba(70, 3, 255, 0.5);
+      text-shadow: 0 0 10px rgba(255, 0, 200, 0.5);
     }
 
     .page-text {
@@ -223,52 +215,59 @@
     }
     
     .scroll-container::-webkit-scrollbar-track {
-      background: rgb(153, 131, 131);
+      background: rgba(153, 131, 131, 0.3);
       border-radius: 10px;
     }
     
     .scroll-container::-webkit-scrollbar-thumb {
-      background: rgb(247, 6, 6);
+      background: rgba(247, 6, 6, 0.6);
       border-radius: 10px;
     }
     
     .scroll-container::-webkit-scrollbar-thumb:hover {
-      background: rgb(250, 2, 2);
+      background: rgba(250, 2, 2, 0.8);
     }
 
-    /* Controls */
+    /* Controls - FIXED POSITION */
     .controls {
-      margin-top: 30px;
-      z-index: 4;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
       text-align: center;
-      position: absolute;
-      bottom: 30px;
-      width: 100%;
+      padding: 15px;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(10px);
       display: flex;
       justify-content: center;
       gap: 15px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     button {
-      padding: 12px 25px;
-      font-size: 16px;
+      padding: 14px 30px;
+      font-size: 18px;
       background: rgba(255, 255, 255, 0.25);
       color: #fff;
       border: 1px solid rgba(255, 255, 255, 0.3);
       border-radius: 50px;
       cursor: pointer;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2),
+                  0 0 15px rgba(255, 0, 200, 0.3);
       transition: all 0.3s ease;
       backdrop-filter: blur(10px);
       display: flex;
       align-items: center;
       gap: 8px;
+      min-width: 140px;
     }
 
     button:hover {
-      background: rgb(30, 7, 240);
+      background: rgba(30, 7, 240, 0.7);
       transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25),
+                  0 0 20px rgba(0, 140, 255, 0.5);
     }
 
     button:disabled {
@@ -279,7 +278,7 @@
 
     /* Page counter */
     .page-counter {
-      position: absolute;
+      position: fixed;
       top: 20px;
       left: 50%;
       transform: translateX(-50%);
@@ -291,50 +290,53 @@
       backdrop-filter: blur(5px);
       color: white;
       font-weight: 500;
+      box-shadow: 0 0 15px rgba(0, 0, 255, 0.6);
     }
 
-    /* Decorative elements */
-    .decoration {
-      position: absolute;
-      width: 200px;
-      height: 200px;
+    /* Mobile swipe indicators */
+    .swipe-indicators {
+      position: fixed;
+      bottom: 100px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      z-index: 5;
+      opacity: 0.7;
+      animation: pulse 2s infinite;
+    }
+    
+    .swipe-indicator {
+      font-size: 24px;
+      background: rgba(255, 255, 255, 0.3);
       border-radius: 50%;
-      background: radial-gradient(rgba(248, 3, 3, 0.932), transparent 70%);
-      filter: blur(40px);
-      z-index: 2;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 0 15px rgba(255, 0, 200, 0.5);
     }
     
-    .decoration:nth-child(1) {
-      top: 10%;
-      left: 10%;
-      width: 300px;
-      height: 300px;
+    @keyframes pulse {
+      0% { opacity: 0.4; transform: scale(0.95); }
+      50% { opacity: 0.8; transform: scale(1.05); }
+      100% { opacity: 0.4; transform: scale(0.95); }
     }
-    
-    .decoration:nth-child(2) {
-      bottom: 10%;
-      right: 10%;
-      width: 250px;
-      height: 250px;
-    }
-    
-    .decoration:nth-child(3) {
-      top: 40%;
-      right: 20%;
-      width: 180px;
-      height: 180px;
-    }
-@media (min-width: 768px) {
-  .page-title {
-    font-size: 2.8rem;
-  }
-
-  .page-text {
-    font-size: 1.3rem;
-  }
-}
 
     /* Responsive design */
+    @media (min-width: 768px) {
+      .page-title {
+        font-size: 2.8rem;
+      }
+
+      .page-text {
+        font-size: 1.3rem;
+      }
+    }
+
     @media (max-width: 480px) {
       .book-container {
         width: 340px;
@@ -346,20 +348,38 @@
       }
       
       .page-title {
-        font-size: 2rem;
+        font-size: 1.8rem;
+        margin-bottom: 10px;
       }
       
       .page-text {
-        font-size: 1rem;
+        font-size: 0.95rem;
+        line-height: 1.6;
       }
       
       button {
-        padding: 10px 20px;
-        font-size: 14px;
+        padding: 12px 20px;
+        font-size: 16px;
+        min-width: 120px;
       }
       
       .scroll-container {
         height: calc(100% - 60px);
+      }
+      
+      .page-counter {
+        font-size: 1rem;
+        padding: 6px 15px;
+      }
+      
+      .swipe-indicators {
+        bottom: 80px;
+      }
+      
+      .swipe-indicator {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
       }
     }
   </style>
@@ -369,13 +389,14 @@
   <!-- Floating Love Emojis -->
   <div class="floating-hearts" id="hearts"></div>
   
-  <!-- Decorative elements -->
-  <div class="decoration"></div>
-  <div class="decoration"></div>
-  <div class="decoration"></div>
-
   <!-- Page counter -->
   <div class="page-counter">Page <span id="current-page">1</span> of <span id="total-pages"></span></div>
+  
+  <!-- Mobile swipe indicators -->
+  <div class="swipe-indicators">
+    <div class="swipe-indicator"><i class="fas fa-arrow-left"></i></div>
+    <div class="swipe-indicator"><i class="fas fa-arrow-right"></i></div>
+  </div>
 
   <!-- Flipbook -->
   <div class="book-container">
@@ -429,15 +450,15 @@
             <div class="page-text">
              <p>After that reunion at Toll Kimbo, something shifted. It started with small conversations—the kind that sneak up on you and stretch into hours without you noticing. Day after day, night after night, we spoke. About everything and nothing. About dreams we once had and the lives we were building now.</p>
 
-<p>Her voice became the music in my day. It was like a ritual—one I couldn’t go without. And somewhere in between those calls, in the gentle silences, the teasing laughter, and the vulnerable confessions, I realized I didn’t just want Alice back in my life.</p>
+<p>Her voice became the music in my day. It was like a ritual—one I couldn't go without. And somewhere in between those calls, in the gentle silences, the teasing laughter, and the vulnerable confessions, I realized I didn't just want Alice back in my life.</p>
 
 <p>I wanted her in it. For good.</p>
 
-<p>Sometimes, the conversations felt like we were soulmates in the making. Other times, we clashed—frustrated by the past, by misread words, by fears we didn’t know how to voice. But even in those moments, I didn’t want to let go. I knew this wasn’t just friendship rekindled. It was something deeper—more delicate, more powerful.</p>
+<p>Sometimes, the conversations felt like we were soulmates in the making. Other times, we clashed—frustrated by the past, by misread words, by fears we didn't know how to voice. But even in those moments, I didn't want to let go. I knew this wasn't just friendship rekindled. It was something deeper—more delicate, more powerful.</p>
 
-<p>She wasn’t just someone I cared about. She was becoming home.</p>
+<p>She wasn't just someone I cared about. She was becoming home.</p>
 
-<p>We had planned another class meetup—a simple picnic by the riverside near our old school grounds. It was our second time seeing each other since that night at Toll Kimbo, and I couldn’t stop thinking about her. About the way her presence filled a space. About how everything seemed softer when she was near.</p>
+<p>We had planned another class meetup—a simple picnic by the riverside near our old school grounds. It was our second time seeing each other since that night at Toll Kimbo, and I couldn't stop thinking about her. About the way her presence filled a space. About how everything seemed softer when she was near.</p>
 
 <p>That day, when she arrived, time slowed down.</p>
 
@@ -447,7 +468,7 @@
 
 <p>As the sun dipped low and golden hour painted the sky, we slipped away from the group. Just like old times, just like destiny had always planned it. We walked side by side along the quiet path, where the breeze whispered through the trees and memories lingered in the air.</p>
 
-<p>It wasn’t about the words anymore. It was the silence between them that said everything.</p>
+<p>It wasn't about the words anymore. It was the silence between them that said everything.</p>
 
 <p>She brushed her hand against mine, and I took it, gently. Her fingers fit into mine like they had always belonged there. I looked at her—and in her eyes, I saw it too.</p>
 
@@ -461,13 +482,13 @@
 
 <p>But to me, it was everything.</p>
 
-<p>Since that day, I haven’t stopped thinking about her. She’s the thought that lingers at sunrise and the prayer I whisper before sleep. And while she still says she’s figuring things out, still not sure what this all means—I’m okay with waiting.</p>
+<p>Since that day, I haven't stopped thinking about her. She's the thought that lingers at sunrise and the prayer I whisper before sleep. And while she still says she's figuring things out, still not sure what this all means—I'm okay with waiting.</p>
 
 <p>Because for me, the answer is already clear.</p>
 
-<p>It’s her. It’s always been her.</p>
+<p>It's her. It's always been her.</p>
 
-<p>Some stories aren’t loud or flashy. Some don’t need dramatic scenes.<br>
+<p>Some stories aren't loud or flashy. Some don't need dramatic scenes.<br>
 Some are told in stolen glances, in inside jokes, in soft walks under the stars.</p>
 
 <p>Ours is one of those.<br>
@@ -502,7 +523,7 @@ For a love that began in a classroom, paused by time, and returned more certain 
 
 <p>It's the way you make the world softer, brighter, better—just by being in it.</p>
 
-<p>Sometimes, I'm afraid I don’t tell you enough. Afraid you’ll never truly grasp how much you saved me, in ways big and small.</p>
+<p>Sometimes, I'm afraid I don't tell you enough. Afraid you'll never truly grasp how much you saved me, in ways big and small.</p>
 
 <p>But let me say it today: <strong>You are everything.</strong></p>
 
@@ -560,22 +581,22 @@ For a love that began in a classroom, paused by time, and returned more certain 
       </div>
       <div class="page page-5" style="--bg-image: url('page5.jpg')">
   <div class="page-content">
-    <div class="page-title">The Words I Haven’t Said</div>
+    <div class="page-title">The Words I Haven't Said</div>
     <div class="scroll-container">
       <div class="page-text">
 <p>Hey Alice,</p>
 
-<p>There’s something I’ve been meaning to tell you — not to complicate things, but to finally speak from my heart without holding back.</p>
+<p>There's something I've been meaning to tell you — not to complicate things, but to finally speak from my heart without holding back.</p>
 
-<p>Since we found our way back into each other’s lives, something in me shifted. It’s like I found a piece of peace I didn’t know I was still searching for. Just hearing from you, talking to you, even thinking of you… it’s like the world gets quieter and more beautiful for a moment.</p>
+<p>Since we found our way back into each other's lives, something in me shifted. It's like I found a piece of peace I didn't know I was still searching for. Just hearing from you, talking to you, even thinking of you… it's like the world gets quieter and more beautiful for a moment.</p>
 
-<p>You’re more than just someone I care about. You’re someone I admire deeply — your kindness, your humor, your ambition, the way your eyes light up when you smile. You’ve become someone I dream of having by my side, not just as a passing thought, but in the most serious, real way. When the time is right, I wouldn’t hesitate to ask for your hand. That vision of one day calling you mine, taking you home to share life together — it’s one of my deepest hopes.</p>
+<p>You're more than just someone I care about. You're someone I admire deeply — your kindness, your humor, your ambition, the way your eyes light up when you smile. You've become someone I dream of having by my side, not just as a passing thought, but in the most serious, real way. When the time is right, I wouldn't hesitate to ask for your hand. That vision of one day calling you mine, taking you home to share life together — it's one of my deepest hopes.</p>
 
-<p>But at the same time… I’ve been struggling. Some days, the silence between us makes my heart race with doubt, breaks something in me. I lose sleep. I get stuck in thoughts that spiral. I’ve even thought about disappearing, blocking you, pushing myself away — not because I want to forget you, but because I don’t know how to carry the weight of wanting something so deeply and not knowing if it’s ever going to be mine.</p>
+<p>But at the same time… I've been struggling. Some days, the silence between us makes my heart race with doubt, breaks something in me. I lose sleep. I get stuck in thoughts that spiral. I've even thought about disappearing, blocking you, pushing myself away — not because I want to forget you, but because I don't know how to carry the weight of wanting something so deeply and not knowing if it's ever going to be mine.</p>
 
-<p>But then I remember your smile, your voice, the light you bring. And somehow, I hang on — even if it’s just by holding onto a photo of you, or the memory of how you welcomed me so warmly. It reminds me that whatever this is, it’s real to me. And that’s worth something.</p>
+<p>But then I remember your smile, your voice, the light you bring. And somehow, I hang on — even if it's just by holding onto a photo of you, or the memory of how you welcomed me so warmly. It reminds me that whatever this is, it's real to me. And that's worth something.</p>
 
-<p>I’m not asking for answers, or promises. I just needed to say it — honestly, openly, fully. Because you’re worth every word, and this isn’t just a passing crush for me.</p>
+<p>I'm not asking for answers, or promises. I just needed to say it — honestly, openly, fully. Because you're worth every word, and this isn't just a passing crush for me.</p>
 <p><em>~~Chilloh~~</em></p>
       </div>
     </div>
@@ -587,7 +608,7 @@ For a love that began in a classroom, paused by time, and returned more certain 
     <div class="page-title">carved silence😊</div>
     <div class="scroll-container">
       <div class="page-text">
-        <p>I don’t know what your heart holds close,<br>
+        <p>I don't know what your heart holds close,<br>
 But mine has carved your name like a rose.<br>
 In every quiet moment, you appear—<br>
 Soft as a whisper, yet crystal clear.</p>
@@ -597,7 +618,7 @@ Not for the world, but for the love I see.<br>
 In the way your smile feels like dawn,<br>
 Even when I fear this might be gone.</p>
 
-<p>If love were words, I’d write you skies,<br>
+<p>If love were words, I'd write you skies,<br>
 Filled with stars that never lie.<br>
 But lately, I walk this path alone,<br>
 With questions growing like overgrown stone.</p>
@@ -608,7 +629,7 @@ Am I part of your hidden flame,<br>
 Or just a shadow calling your name?</p>
 
 <p>So if there's truth behind your eyes,<br>
-Let it rise, don’t let it disguise.<br>
+Let it rise, don't let it disguise.<br>
 For hearts like mine don't ask in vain—<br>
 They seek the sun, not love in rain.</p>
 
@@ -621,7 +642,6 @@ They seek the sun, not love in rain.</p>
 <div class="page page-7" style="--bg-image: url('page7.jpg')">
   <div class="page-content">
     <div class="page-title">The Rival😊</div>
-
     <div class="scroll-container">
       <div class="page-text">
         <p>Your beauty leaves me truly weak,<br>
@@ -649,7 +669,7 @@ They seek the sun, not love in rain.</p>
     </div>
   </div>
 
-  <!-- Navigation -->
+  <!-- Navigation - FIXED POSITION -->
   <div class="controls">
     <button id="prevBtn">
       <i class="fas fa-arrow-left"></i> Previous
@@ -666,6 +686,7 @@ They seek the sun, not love in rain.</p>
   const currentPageEl = document.getElementById('current-page');
   const totalPagesEl = document.getElementById('total-pages');
 
+  // Load last page from localStorage
   let currentPage = parseInt(localStorage.getItem('lastPage')) || 0;
   const totalPages = pages.length;
 
@@ -692,7 +713,7 @@ They seek the sun, not love in rain.</p>
     prevBtn.disabled = currentPage === 0;
     nextBtn.disabled = currentPage === totalPages - 1;
 
-    // Store the last page index
+    // Save the current page to localStorage
     localStorage.setItem('lastPage', currentPage);
   }
 
@@ -732,8 +753,32 @@ They seek the sun, not love in rain.</p>
     if (e.key === 'ArrowRight') nextPage();
     if (e.key === 'ArrowLeft') prevPage();
   });
+  
+  // Add touch swipe support for mobile
+  let touchStartX = 0;
+  let touchEndX = 0;
+  
+  document.addEventListener('touchstart', e => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+  
+  document.addEventListener('touchend', e => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  });
+  
+  function handleSwipe() {
+    const swipeThreshold = 50;
+    if (touchStartX - touchEndX > swipeThreshold) {
+      // Swipe left
+      nextPage();
+    } else if (touchEndX - touchStartX > swipeThreshold) {
+      // Swipe right
+      prevPage();
+    }
+  }
 
-  // Initialize
+  // Initialize with the last page visited
   updatePages();
 </script>
 
